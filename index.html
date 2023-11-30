@@ -1,860 +1,517 @@
 <style>
-    .calendar-section * {
-        box-sizing: border-box;
-        font-family: 'Inter', Arial, sans-serif;
-    }
+  .calendar-section * {
+    box-sizing: border-box;
+    font-family: "Inter", Arial, sans-serif;
+  }
 
-    .calendar-section {
-        width: 90%;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 24px;
-        margin: 0px auto;
-    }
+  .calendar-section {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin: 0px auto;
+  }
 
-    .calendar-section__block {
-        width: 480px;
-        height: 480px;
-        border-radius: 40px;
-    }
+  .calendar-section__block {
+    width: 480px;
+    height: 480px;
+    border-radius: 40px;
+  }
 
-    .calendar-section__calendar-block {
-        background-color: #5363F7;
-        background-position: center;
-        background-size: cover;
-        display: flex;
-        justify-content: center;
-        padding-top: 80px;
-    }
+  .calendar-section__calendar-block {
+    background-color: #5363f7;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    padding-top: 80px;
+  }
 
-    .calendar-section__calendar {
-        width: 340px;
-        height: 270px;
-        color: #FFFFFF;
-    }
+  .calendar-section__calendar {
+    width: 340px;
+    height: 270px;
+    color: #ffffff;
+  }
 
-    .calendar-section__calendar_controls {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 16px;
-    }
+  .calendar-section__calendar_controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
 
-    .calendar-section__calendar_month_title {
-        font-weight: 500;
-        font-size: 32px;
-        line-height: 130%;
-        text-transform: capitalize;
-    }
+  .calendar-section__calendar_month_title {
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 130%;
+    text-transform: capitalize;
+  }
 
-    .calendar-section__calendar_month_arrows {
-        display: flex;
-        gap: 8px;
-    }
+  .calendar-section__calendar_month_arrows {
+    display: flex;
+    gap: 8px;
+  }
 
-    .calendar-section__calendar_content {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        gap: 8px;
-    }
+  .calendar-section__calendar_content {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+  }
 
-    .calendar-section__date-button {
-        font-weight: 400;
-        font-size: 24px;
-        line-height: 20px;
-        text-align: center;
-        border-radius: 50%;
-        aspect-ratio: 1;
-        padding: 0;
-        background: none;
-        border: none;
-        cursor: pointer;
-        color: #FFFFFF;
-    }
+  .calendar-section__date-button {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    aspect-ratio: 1;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ffffff;
+  }
 
-    .calendar-section__date-button_hidden {
-        opacity: 0;
-        pointer-events: none;
-    }
+  .calendar-section__date-button_hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
 
-    .calendar-section__date-button_active {
-        background-color: #FFFFFF;
-        color: #5363F7;
-    }
+  .calendar-section__date-button_active {
+    background-color: #ffffff;
+    color: #5363f7;
+  }
 
-    .calendar-section__date-button_weekend {
-        color: #8591FF;
-    }
+  .calendar-section__date-button_weekend {
+    color: #8591ff;
+  }
 
-    .calendar-section__events-block {
-        position: relative;
-    }
+  .calendar-section__date-button_border {
+    border: 1px white solid;
+  }
 
-    .calendar-section__event-controls {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 16px;
-        color: #FFFFFF;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+  .calendar-section__events-block {
+    position: relative;
+  }
 
-    .calendar-section__event-controls__arrows-container {
-        flex: 1;
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-        align-items: center;
-    }
+  .calendar-section__event-controls {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .calendar-section__event {
-        height: 100%;
-        padding: 50px;
-        color: #FFFFFF;
-        display: flex;
-        flex-direction: column;
-        justify-content: end;
-        background-position: center;
-        background-size: cover;
-        border-radius: 40px;
-    }
+  .calendar-section__event-controls__arrows-container {
+    flex: 1;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-    .calendar-section__event__title {
-        font-weight: 500;
-        font-size: 32px;
-        line-height: 110%;
-        margin-bottom: 16px;
-    }
+  .calendar-section__event {
+    height: 100%;
+    padding: 50px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    background-position: center;
+    background-size: cover;
+    border-radius: 40px;
+  }
 
-    .calendar-section__event__description {
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 130.02%;
-    }
+  .calendar-section__event__title {
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 110%;
+    margin-bottom: 16px;
+  }
 
-    .calendar-section__pagination {
-        display: flex;
-        gap: 12px;
-    }
+  .calendar-section__event__description {
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: 16px;
+    line-height: 130.02%;
+  }
 
-    .calendar-section__pagination__item {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        border: 1px solid #FFFFFF;
-    }
+  .calendar-section__event__homePage_button {
+      font-family: "Inter", sans-serif;
+      font-weight: 500;
+      outline: 0;
+      background: #4F60FA;
+      width: 100%; 
+      border: 0;
+      padding: 15px;
+      border-radius: 40px;
+      color: #FFFFFF;
+      font-size: 14px;
+      -webkit-transition: all 0.1s ease;
+      transition: all 0.1s ease;
+      cursor: pointer;
+      z-index: 1;
 
-    .calendar-section__pagination__item-active {
-        background-color: #FFFFFF;
-    }
+  }
+  
+  .calendar-section__event__homePage_button:hover {
+      background: #FFFFFF;
+      color: #4F60FA;
+  }
 
-    .calendar-section__icon-button {
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        width: 40px;
-        height: 40px;
-        background: none;
-        border: none;
-        cursor: pointer;
-    }
+  .calendar-section__pagination {
+    display: flex;
+    gap: 12px;
+  }
 
-    .calendar-section__icon-button:disabled {
-        opacity: 0.5;
-        pointer-events: none;
-    }
+  .calendar-section__pagination__item {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid #ffffff;
+  }
+
+  .calendar-section__pagination__item-active {
+    background-color: #ffffff;
+  }
+
+  .calendar-section__icon-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .calendar-section__icon-button:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 </style>
 
-<article id="calendar">
-</article>
+<article id="calendar"></article>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/ru.min.js"></script>
 <script type="module">
-    import { createSignal, createEffect, Show, For } from "https://cdn.skypack.dev/solid-js@v1.6.2?min";
-    import { render } from "https://cdn.skypack.dev/solid-js@v1.6.2/web?min";
-    import html from "https://cdn.skypack.dev/solid-js@v1.6.2/html?min";
+  import {
+    createSignal,
+    createEffect,
+    Show,
+    For,
+  } from "https://cdn.skypack.dev/solid-js@v1.6.2?min";
+  import { render } from "https://cdn.skypack.dev/solid-js@v1.6.2/web?min";
+  import html from "https://cdn.skypack.dev/solid-js@v1.6.2/html?min";
 
-    moment.locale('ru')
+  moment.locale("ru");
 
-    // Если нет событий, отобразится это событие
-    const DEFAULT_EVENT = {
-        imageUrl: 'https://248b1e53b67b.hosting.myjino.ru/rzn/app-ny.png',
-        title: 'Скачай помощника для путешествия',
-        description: 'Удобный гид по городу и области в твоем кармане. Что посмотреть, где отдохнуть, как сэкономить.',
-    }
-    // Список всех событий (числа до 10 с ведущими нулями: 1 февраля 2023 = "01.02.2023")
-    const EVENTS = {
-      
-         "17.12.2022": [
-            {
-                imageUrl: "https://static.tildacdn.com/tild6635-3836-4231-b234-343662326466/XoNtJxhPhjA.jpg",
-                title: "Предновогодний Крафт Маркет",
-                description: "FABRIKA пл. Соборная 21. Вход через бар Собака Павлова (со стороны Соборной площади)с 13.00 до 20.00",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild6463-6135-4236-b338-346266363030/o9XXyi1jsug.jpg",
-                title: "Рождество во всем блеске",
-                description: "Коллекционер винтажной и лимитированной косметики впервые в историческом салоне Аромат времени покажет свои раритеты. Начало в 18.00",
-            },
-        ],
-                 "18.12.2022": [
-            {
-                imageUrl: "https://static.tildacdn.com/tild6635-3836-4231-b234-343662326466/XoNtJxhPhjA.jpg",
-                title: "Предновогодний Крафт Маркет",
-                description: "FABRIKA пл. Соборная 21. Вход через бар Собака Павлова (со стороны Соборной площади)с 13.00 до 20.00",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild6234-6136-4537-a230-386134613966/bkdHlr1Nj3k.jpg",
-                title: "Новогодние мастер-классы",
-                description: "Создайте украшение для своего дома или в подарок для друзей в студии рисования Тепло",
-            },
-        ],
-        "20.12.2022": [
-          
-          {
-                imageUrl: "https://static.tildacdn.com/tild6665-3234-4834-b432-653061636363/0074_1.png",
-                title: "День рождения Нового года",
-                description: "интерактивная программа с музыкальными зарисовками,историческими играми и хороводами в 19:00 на Лыбедском бульваре",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild6336-6437-4938-b661-393338353934/0121.jpg",
-                title: "Резиденция Деда мороза",
-                description: "интерактивные анимационные программы с участием сказочных персонажей в Лесопарке с 16:00 до 20:00",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild3561-3938-4237-b038-303836386333/vOEERfKkjgU.jpg",
-                title: "Новогодняя ярмарка",
-                description: "Торговый городок с 10:00 до 22:00",
-            },
-        ],
-        "21.12.2022": [
-          
-         
-            {
-                imageUrl: "https://static.tildacdn.com/tild6336-6437-4938-b661-393338353934/0121.jpg",
-                title: "Резиденция Деда мороза",
-                description: "интерактивные анимационные программы с участием сказочных персонажей в Лесопарке с 16:00 до 20:00",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild3561-3938-4237-b038-303836386333/vOEERfKkjgU.jpg",
-                title: "Новогодняя ярмарка",
-                description: "Торговый городок с 10:00 до 22:00",
-            },
-        ],
-        "22.12.2022": [
-          
-         
-            {
-                imageUrl: "https://static.tildacdn.com/tild6336-6437-4938-b661-393338353934/0121.jpg",
-                title: "Резиденция Деда мороза",
-                description: "интерактивные анимационные программы с участием сказочных персонажей в Лесопарке с 16:00 до 20:00",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild3561-3938-4237-b038-303836386333/vOEERfKkjgU.jpg",
-                title: "Новогодняя ярмарка",
-                description: "Торговый городок с 10:00 до 22:00",
-            },
-        ],
-        "23.12.2022": [
-          
-         
-            {
-                imageUrl: "https://static.tildacdn.com/tild6336-6437-4938-b661-393338353934/0121.jpg",
-                title: "Резиденция Деда мороза",
-                description: "интерактивные анимационные программы с участием сказочных персонажей в Лесопарке с 16:00 до 20:00",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild3561-3938-4237-b038-303836386333/vOEERfKkjgU.jpg",
-                title: "Новогодняя ярмарка",
-                description: "Торговый городок с 10:00 до 22:00",
-            },
-        ],
-        "24.12.2022": [
-          
-         
-            {
-                imageUrl: "https://static.tildacdn.com/tild6336-6437-4938-b661-393338353934/0121.jpg",
-                title: "Резиденция Деда мороза",
-                description: "интерактивные анимационные программы с участием сказочных персонажей в Лесопарке с 16:00 до 20:00",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild3561-3938-4237-b038-303836386333/vOEERfKkjgU.jpg",
-                title: "Новогодняя ярмарка",
-                description: "Торговый городок с 10:00 до 22:00",
-            },
-             {
-                imageUrl: "https://static.tildacdn.com/tild6234-6136-4537-a230-386134613966/bkdHlr1Nj3k.jpg",
-                title: "Новогодние мастер-классы",
-                description: "Создайте украшение для своего дома или в подарок для друзей в студии рисования Тепло",
-            },
-        ],
-        "25.12.2022": [
-          
-            {
-                imageUrl: "https://static.tildacdn.com/tild6336-6437-4938-b661-393338353934/0121.jpg",
-                title: "Резиденция Деда мороза",
-                description: "интерактивные анимационные программы с участием сказочных персонажей в Лесопарке с 16:00 до 20:00",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild3561-3938-4237-b038-303836386333/vOEERfKkjgU.jpg",
-                title: "Новогодняя ярмарка",
-                description: "Торговый городок с 10:00 до 22:00",
-            },
-             {
-                imageUrl: "https://static.tildacdn.com/tild6234-6136-4537-a230-386134613966/bkdHlr1Nj3k.jpg",
-                title: "Новогодние мастер-классы",
-                description: "Создайте украшение для своего дома или в подарок для друзей в студии рисования Тепло",
-            },
-        ],
-          "26.12.2022": [
-          
-            {
-                imageUrl: "https://static.tildacdn.com/tild6336-6437-4938-b661-393338353934/0121.jpg",
-                title: "Резиденция Деда мороза",
-                description: "интерактивные анимационные программы с участием сказочных персонажей в Лесопарке с 16:00 до 20:00",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild3561-3938-4237-b038-303836386333/vOEERfKkjgU.jpg",
-                title: "Новогодняя ярмарка",
-                description: "Торговый городок с 10:00 до 22:00",
-            },
-        ],
-          "27.12.2022": [
-           
-            {
-                imageUrl: "https://static.tildacdn.com/tild6336-6437-4938-b661-393338353934/0121.jpg",
-                title: "Резиденция Деда мороза",
-                description: "интерактивные анимационные программы с участием сказочных персонажей в Лесопарке с 16:00 до 20:00",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild3561-3938-4237-b038-303836386333/vOEERfKkjgU.jpg",
-                title: "Новогодняя ярмарка",
-                description: "Торговый городок с 10:00 до 22:00",
-            },
-             {
-                imageUrl: "https://static.tildacdn.com/tild3137-3630-4363-b933-346262323563/0171.jpg",
-                title: "Выставка ледовых скульптур",
-                description: "территория Хлебозавода №1 с 17:00 до 21:00",
-            },
-        ],
-          "28.12.2022": [
-          
-            {
-                imageUrl: "https://static.tildacdn.com/tild6336-6437-4938-b661-393338353934/0121.jpg",
-                title: "Резиденция Деда мороза",
-                description: "интерактивные анимационные программы с участием сказочных персонажей в Лесопарке с 16:00 до 20:00",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild3561-3938-4237-b038-303836386333/vOEERfKkjgU.jpg",
-                title: "Новогодняя ярмарка",
-                description: "Торговый городок с 10:00 до 22:00",
-            },
-             {
-                imageUrl: "https://static.tildacdn.com/tild3137-3630-4363-b933-346262323563/0171.jpg",
-                title: "Выставка ледовых скульптур",
-                description: "территория Хлебозавода №1 (пл. Соборная 18) с 12:00 до 21:00",
-            },
-        ],
-          "29.12.2022": [
-            {
-                imageUrl: "https://static.tildacdn.com/tild3137-3630-4363-b933-346262323563/0171.jpg",
-                title: "Выставка ледовых скульптур",
-                description: "территория Хлебозавода №1 (пл. Соборная 18) с 12:00 до 21:00",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild6336-6437-4938-b661-393338353934/0121.jpg",
-                title: "Резиденция Деда мороза",
-                description: "интерактивные анимационные программы с участием сказочных персонажей в Лесопарке с 16:00 до 20:00",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild3561-3938-4237-b038-303836386333/vOEERfKkjgU.jpg",
-                title: "Новогодняя ярмарка",
-                description: "Торговый городок с 10:00 до 22:00",
-            },
-        ],
-        "30.12.2022": [
-            {
-                imageUrl: "https://static.tildacdn.com/tild3137-3630-4363-b933-346262323563/0171.jpg",
-                title: "Выставка ледовых скульптур",
-                description: "территория Хлебозавода №1 (пл. Соборная 18) с 12:00 до 21:00",
-            },
-          
-            {
-                imageUrl: "https://static.tildacdn.com/tild3561-3938-4237-b038-303836386333/vOEERfKkjgU.jpg",
-                title: "Новогодняя ярмарка",
-                description: "Торговый городок с 10:00 до 22:00",
-            },
-        ],
-           "31.12.2022": [
-              
-          
-            {
-                imageUrl: "https://static.tildacdn.com/tild3561-3938-4237-b038-303836386333/vOEERfKkjgU.jpg",
-                title: "Новогодняя ярмарка",
-                description: "Торговый городок с 10:00 до 22:00",
-            },
-        ],
-        "02.01.2023": [
-            {
-                imageUrl: "https://static.tildacdn.com/tild6433-3163-4139-a363-356636336331/0152.jpg",
-                title: "День Рождения Нового года",
-                description: "Праздничные семейные представления, анимационные программы, концерты на Лыбедском бульваре с 15:00 до 18:00 ",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild6336-6437-4938-b661-393338353934/0121.jpg",
-                title: "Резиденция Деда мороза",
-                description: "интерактивные анимационные программы с участием сказочных персонажей в Лесопарке с 16:00 до 20:00",
-            },
-           
-            {
-                imageUrl: "https://static.tildacdn.com/tild3434-6134-4062-a366-303262333239/zMc-XVQ79bc.jpg",
-                title: "Рязанский почтальон ",
-                description: "театрализованная праздничная экскурсия по ул. Почтовой в 18.00 со стороны пл.Ленина",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild3734-6434-4235-a633-363065383561/SobPl-023.jpg",
-                title: "Фестиваль туристических маршрутов «Твоя Новогодняя Рязань»",
-                description: "прогулки по центральные улицам Рязани",
-            },
-             {
-                imageUrl: "https://static.tildacdn.com/tild3561-3938-4237-b038-303836386333/vOEERfKkjgU.jpg",
-                title: "Новогодняя ярмарка",
-                description: "Торговый городок с 10:00 до 22:00",
-            },
-             {
-                imageUrl: "https://static.tildacdn.com/tild6234-6231-4161-a462-636236313038/P21-123.jpg",
-                title: "Мастерская Снеговика",
-                description: "Ремесленная площадка, мастер-классы для всей семьи на Лыбедском бульваре с 12:00 до 18:00",
-            },
-        ],
-         "03.01.2023": [
-            {
-                imageUrl: "https://static.tildacdn.com/tild6433-3163-4139-a363-356636336331/0152.jpg",
-                title: "День Рождения Нового года",
-                description: "Праздничные семейные представления, анимационные программы, концерты на Лыбедском бульваре с 15:00 до 18:00 ",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild6336-6437-4938-b661-393338353934/0121.jpg",
-                title: "Резиденция Деда мороза",
-                description: "интерактивные анимационные программы с участием сказочных персонажей в Лесопарке с 16:00 до 20:00",
-            },
-    
-            {
-                imageUrl: "https://static.tildacdn.com/tild3434-6134-4062-a366-303262333239/zMc-XVQ79bc.jpg",
-                title: "Рязанский почтальон ",
-                description: "театрализованная праздничная экскурсия по ул. Почтовой в 18.00 со стороны пл.Ленина",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild3734-6434-4235-a633-363065383561/SobPl-023.jpg",
-                title: "Фестиваль туристических маршрутов «Твоя Новогодняя Рязань»",
-                description: "прогулки по центральные улицам Рязани",
-            },
-             {
-                imageUrl: "https://static.tildacdn.com/tild3561-3439-4364-b134-366666343766/Kst-044.jpg",
-                title: "Музейная программа Поет зима – аукает",
-                description: "в музее-заповеднике в селе Константиново",
-            },
-             {
-                imageUrl: "https://static.tildacdn.com/tild3561-3938-4237-b038-303836386333/vOEERfKkjgU.jpg",
-                title: "Новогодняя ярмарка",
-                description: "Торговый городок с 10:00 до 22:00",
-            },
-             {
-                imageUrl: "https://static.tildacdn.com/tild6234-6231-4161-a462-636236313038/P21-123.jpg",
-                title: "Мастерская Снеговика",
-                description: "Ремесленная площадка, мастер-классы для всей семьи на Лыбедском бульваре с 12:00 до 18:00",
-            },
-        ],
-         "04.01.2023": [
-            {
-                imageUrl: "https://static.tildacdn.com/tild6433-3163-4139-a363-356636336331/0152.jpg",
-                title: "День Рождения Нового года",
-                description: "Праздничные семейные представления, анимационные программы, концерты на Лыбедском бульваре с 15:00 до 18:00 ",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild6336-6437-4938-b661-393338353934/0121.jpg",
-                title: "Резиденция Деда мороза",
-                description: "интерактивные анимационные программы с участием сказочных персонажей в Лесопарке с 16:00 до 20:00",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild3137-3630-4363-b933-346262323563/0171.jpg",
-                title: "Выставка ледовых скульптур",
-                description: "территория Хлебозавода №1 (пл. Соборная 18) с 12:00 до 21:00",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild3434-6134-4062-a366-303262333239/zMc-XVQ79bc.jpg",
-                title: "Рязанский почтальон ",
-                description: "театрализованная праздничная экскурсия по ул. Почтовой в 18.00 со стороны пл.Ленина",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild3734-6434-4235-a633-363065383561/SobPl-023.jpg",
-                title: "Фестиваль туристических маршрутов «Твоя Новогодняя Рязань»",
-                description: "прогулки по центральные улицам Рязани",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild3064-6364-4439-b730-313531333139/Kst-035.jpg",
-                title: "Музейная программа «Усадьба в свете Рождества»",
-                description: "театрализованное представление для детей в музее-заповеднике С.А. Есенина",
-            },
-             {
-                imageUrl: "https://static.tildacdn.com/tild3561-3938-4237-b038-303836386333/vOEERfKkjgU.jpg",
-                title: "Новогодняя ярмарка",
-                description: "Торговый городок с 10:00 до 22:00",
-            },
-             {
-                imageUrl: "https://static.tildacdn.com/tild6234-6231-4161-a462-636236313038/P21-123.jpg",
-                title: "Мастерская Снеговика",
-                description: "Ремесленная площадка, мастер-классы для всей семьи на Лыбедском бульваре с 12:00 до 18:00",
-            },
-        ],
-         "05.01.2023": [
-            {
-                imageUrl: "https://static.tildacdn.com/tild6433-3163-4139-a363-356636336331/0152.jpg",
-                title: "День Рождения Нового года",
-                description: "Праздничные семейные представления, анимационные программы, концерты на Лыбедском бульваре с 15:00 до 18:00 ",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild6336-6437-4938-b661-393338353934/0121.jpg",
-                title: "Резиденция Деда мороза",
-                description: "интерактивные анимационные программы с участием сказочных персонажей в Лесопарке с 16:00 до 20:00",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild3137-3630-4363-b933-346262323563/0171.jpg",
-                title: "Выставка ледовых скульптур",
-                description: "территория Хлебозавода №1 (пл. Соборная 18) с 12:00 до 21:00",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild3434-6134-4062-a366-303262333239/zMc-XVQ79bc.jpg",
-                title: "Рязанский почтальон ",
-                description: "театрализованная праздничная экскурсия по ул. Почтовой в 18.00 со стороны пл.Ленина",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild3734-6434-4235-a633-363065383561/SobPl-023.jpg",
-                title: "Фестиваль туристических маршрутов «Твоя Новогодняя Рязань»",
-                description: "прогулки по центральные улицам Рязани",
-            },
-             {
-                imageUrl: "https://static.tildacdn.com/tild3561-3439-4364-b134-366666343766/Kst-044.jpg",
-                title: "Забежала Коляда на село",
-                description: "театрализованная программа в музее С.А.Есенина",
-            },
-             {
-                imageUrl: "https://static.tildacdn.com/tild3561-3938-4237-b038-303836386333/vOEERfKkjgU.jpg",
-                title: "Новогодняя ярмарка",
-                description: "Торговый городок с 10:00 до 22:00",
-            },
-             {
-                imageUrl: "https://static.tildacdn.com/tild6234-6231-4161-a462-636236313038/P21-123.jpg",
-                title: "Мастерская Снеговика",
-                description: "Ремесленная площадка, мастер-классы для всей семьи на Лыбедском бульваре с 12:00 до 18:00",
-            },
-             {
-                imageUrl: "https://static.tildacdn.com/tild6361-3230-4435-a233-356632343435/KD-045.jpg",
-                title: "Зимний пикник",
-                description: "Танцевальные и кулинарные мастер-классы, дегустация горячего шоколада, блюд, приготовленных на открытом огне в Торговых рядах на Краснорядской с 12.00 до 17.00",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild3430-3138-4430-b462-323236643166/tB6X-8skwZg.jpg",
-                title: "В театре «Переход» идёт показ музыкальной сказки Питер Пэн",
-                description: "Заказать билеты можно на www.teatr-perehod.com",
-            },
-        ],
-         "06.01.2023": [
-          
-            {
-                imageUrl: "https://static.tildacdn.com/tild6336-6437-4938-b661-393338353934/0121.jpg",
-                title: "Резиденция Деда мороза",
-                description: "интерактивные анимационные программы с участием сказочных персонажей в Лесопарке с 16:00 до 20:00",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild3137-3630-4363-b933-346262323563/0171.jpg",
-                title: "Выставка ледовых скульптур",
-                description: "территория Хлебозавода №1 (пл. Соборная 18) с 12:00 до 21:00",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild3434-6134-4062-a366-303262333239/zMc-XVQ79bc.jpg",
-                title: "Рязанский почтальон ",
-                description: "театрализованная праздничная экскурсия по ул. Почтовой в 18.00 со стороны пл.Ленина",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild3734-6434-4235-a633-363065383561/SobPl-023.jpg",
-                title: "Фестиваль туристических маршрутов «Твоя Новогодняя Рязань»",
-                description: "прогулки по центральные улицам Рязани",
-            },
-             {
-                imageUrl: "https://static.tildacdn.com/tild3561-3439-4364-b134-366666343766/Kst-044.jpg",
-                title: "Забежала Коляда на село",
-                description: "театрализованная программа в музее С.А.Есенина",
-            },
-             {
-                imageUrl: "https://static.tildacdn.com/tild3561-3938-4237-b038-303836386333/vOEERfKkjgU.jpg",
-                title: "Новогодняя ярмарка",
-                description: "Торговый городок с 10:00 до 22:00",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild6234-6231-4161-a462-636236313038/P21-123.jpg",
-                title: "Мастерская Снеговика",
-                description: "Ремесленная площадка, мастер-классы для всей семьи на Лыбедском бульваре с 12:00 до 18:00",
-            },
-            
-             {
-                imageUrl: "https://static.tildacdn.com/tild3430-3138-4430-b462-323236643166/tB6X-8skwZg.jpg",
-                title: "В театре «Переход» идёт показ музыкальной сказки Питер Пэн",
-                description: "Заказать билеты можно на www.teatr-perehod.com",
-            },
-        ],
-         "07.01.2023": [
-           
-            {
-                imageUrl: "https://static.tildacdn.com/tild6336-6437-4938-b661-393338353934/0121.jpg",
-                title: "Резиденция Деда мороза",
-                description: "интерактивные анимационные программы с участием сказочных персонажей в Лесопарке с 16:00 до 20:00",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild3137-3630-4363-b933-346262323563/0171.jpg",
-                title: "Выставка ледовых скульптур",
-                description: "территория Хлебозавода №1 (пл. Соборная 18) с 12:00 до 21:00",
-            },
-           
-             {
-                imageUrl: "https://static.tildacdn.com/tild3561-3938-4237-b038-303836386333/vOEERfKkjgU.jpg",
-                title: "Новогодняя ярмарка",
-                description: "Торговый городок с 10:00 до 22:00",
-            },
-            {
-                imageUrl: "https://static.tildacdn.com/tild6234-6231-4161-a462-636236313038/P21-123.jpg",
-                title: "Мастерская Снеговика",
-                description: "Ремесленная площадка, мастер-классы для всей семьи на Лыбедском бульваре с 12:00 до 18:00",
-            },
-        ],
-        "08.01.2023": [
-            {
-                imageUrl: "https://static.tildacdn.com/tild6433-3163-4139-a363-356636336331/0152.jpg",
-                title: "День Рождения Нового года",
-                description: "Праздничные семейные представления, анимационные программы, концерты на Лыбедском бульваре с 15:00 до 18:00 ",
-            },
-           
-            {
-                imageUrl: "https://static.tildacdn.com/tild3137-3630-4363-b933-346262323563/0171.jpg",
-                title: "Выставка ледовых скульптур",
-                description: "территория Хлебозавода №1 (пл. Соборная 18) с 12:00 до 21:00",
-            },
-             {
-                imageUrl: "https://static.tildacdn.com/tild3561-3938-4237-b038-303836386333/vOEERfKkjgU.jpg",
-                title: "Новогодняя ярмарка",
-                description: "Торговый городок с 10:00 до 22:00",
-            },
-            
-        ],
-         "13.01.2023": [
-         {
-                imageUrl: "https://static.tildacdn.com/tild3561-3439-4364-b134-366666343766/Kst-044.jpg",
-                title: "Забежала Коляда на село",
-                description: "театрализованная программа в музее С.А.Есенина",
-            },
-            ],
-        
+  // Если нет событий, отобразится это событие
+  const DEFAULT_EVENT = {
+    imageUrl: "https://248b1e53b67b.hosting.myjino.ru/rzn/app-ny.png",
+    title: "Скачай помощника для путешествия",
+    description:
+      "Удобный гид по городу и области в твоем кармане. Что посмотреть, где отдохнуть, как сэкономить.",
+    homePage: "https://apps-rzn.site/",
+  };
+  // Список всех событий (числа до 10 с ведущими нулями: 1 февраля 2023 = "01.02.2023". homePage — ссылка на событие, начиная с https://)
+  const EVENTS = {
+    "01.12.2023": [
+      {
+        imageUrl:
+          "https://static.tildacdn.com/tild3561-3439-4364-b134-366666343766/Kst-044.jpg",
+        title: "title1",
+        description: "description1",
+        homePage: "https://www.ya.ru",
+      },
+      {
+        imageUrl:
+          "https://static.tildacdn.com/tild3561-3439-4364-b134-366666343766/Kst-044.jpg",
+        title: "title2",
+        description: "description2",
+        homePage: "https://www.ya.ru",
+      },
+    ],
+    "28.12.2023": [
+      {
+        imageUrl:
+          "https://static.tildacdn.com/tild3561-3439-4364-b134-366666343766/Kst-044.jpg",
+        title: "title1",
+        description: "description1",
+        homePage: "https://www.ya.ru",
+      },
+      {
+        imageUrl:
+          "https://static.tildacdn.com/tild3561-3439-4364-b134-366666343766/Kst-044.jpg",
+        title: "title2",
+        description: "description2",
+        homePage: "https://www.ya.ru",
+      },
+    ],
+    "01.01.2024": [
+      {
+        imageUrl:
+          "https://static.tildacdn.com/tild3561-3439-4364-b134-366666343766/Kst-044.jpg",
+        title: "title1",
+        description: "description1",
+        homePage: "https://www.ya.ru",
+      },
+      {
+        imageUrl:
+          "https://static.tildacdn.com/tild3561-3439-4364-b134-366666343766/Kst-044.jpg",
+        title: "title2",
+        description: "description2",
+        homePage: "https://www.ya.ru",
+      },
+    ],
+  };
+
+  const getDefaultSelectedDate = () => {
+    const now = moment();
+    const periodStart = moment("2023-12-01");
+    const periodEnd = moment("2024-01-31");
+
+    if (now.isBefore(periodStart)) return periodStart;
+    if (now.isAfter(periodEnd)) return periodEnd;
+    return now;
+  };
+
+  const DATE_FORMAT = "DD.MM.yyyy";
+  const [selectedDate, setSelectedDate] = createSignal(
+    getDefaultSelectedDate()
+  );
+  const formattedSelectedDate = () => selectedDate().format(DATE_FORMAT);
+
+  const makeMonthCalendar = () => {
+    const out = [];
+
+    const inDate = selectedDate().clone();
+
+    const currentMonth = inDate.month();
+    let momentCounter = inDate
+      .startOf("month")
+      .subtract(inDate.subtract(1, "month").endOf("month").day() - 1, "days");
+
+    for (let day = 0; day < 6 * 7; day++) {
+      const dayObj = { date: momentCounter.date(), classes: [] };
+
+      if (EVENTS[momentCounter.format(DATE_FORMAT)]) {
+        dayObj.classes.push("calendar-section__date-button_border");
+      }
+
+      if (momentCounter.month() !== currentMonth) {
+        dayObj.classes.push("calendar-section__date-button_hidden");
+      }
+      if ([6, 0].includes(momentCounter.day())) {
+        dayObj.classes.push("calendar-section__date-button_weekend");
+      }
+
+      out.push(dayObj);
+      momentCounter.add(1, "day");
     }
 
-    const getDefaultSelectedDate = () => {
-        const now = moment();
-        const periodStart = moment('2023-12-01');
-        const periodEnd = moment('2024-01-31');
+    return out;
+  };
 
-        if (now.isBefore(periodStart)) return periodStart;
-        if (now.isAfter(periodEnd)) return periodEnd;
-        return now;
-    }
+  const CalendarBlock = () => {
+    const calendar = () => makeMonthCalendar();
 
-    const DATE_FORMAT = 'DD.MM.yyyy'
-    const [selectedDate, setSelectedDate] = createSignal(getDefaultSelectedDate());
-    const formattedSelectedDate = () => selectedDate().format(DATE_FORMAT)
-
-    const makeMonthCalendar = () => {
-        const out = []
-
-        const inDate = selectedDate().clone()
-
-        const currentMonth = inDate.month()
-        let momentCounter = inDate
-            .startOf('month')
-            .subtract(
-                inDate
-                    .subtract(1, 'month')
-                    .endOf('month')
-                    .day() - 1,
-                'days'
-            )
-
-        for (let day = 0; day < 6 * 7; day++) {
-            const dayObj = { date: momentCounter.date(), classes: [] }
-            if (momentCounter.month() !== currentMonth) {
-                dayObj.classes.push('calendar-section__date-button_hidden')
-            }
-            if ([6, 0].includes(momentCounter.day())) {
-                dayObj.classes.push('calendar-section__date-button_weekend')
-            }
-
-            out.push(dayObj)
-            momentCounter.add(1, 'day')
-        }
-
-        return out;
-    }
-
-    const CalendarBlock = () => {
-        const calendar = () => makeMonthCalendar()
-
-        return html`
-            <div class="calendar-section__block calendar-section__calendar-block">
-                <div class="calendar-section__calendar">
-                    <div class="calendar-section__calendar_controls">
-                        <div class="calendar-section__calendar_month_title">
-                            ${() => selectedDate().format('MMMM')}
-                        </div>
-                        <div class="calendar-section__calendar_month_arrows">
-                            <${ArrowButton}
-                                back=${true}
-                                disabled=${() => selectedDate().month() === 11}
-                                onClick=${e => setSelectedDate(moment(selectedDate()).subtract(1, 'month').startOf('month'))}
-                            />
-                            <${ArrowButton}
-                                disabled=${() => selectedDate().month() === 1}
-                                onClick=${e => setSelectedDate(moment(selectedDate()).add(1, 'month').startOf('month'))}
-                            />
-                        </div>
-                    </div>
-                    <div class="calendar-section__calendar_content">
-                       ${() => calendar().map((el, i) => html`
-                            <button
-                                onClick=${e => setSelectedDate(() => moment(selectedDate()).date(el.date))}
-                                class="${() => [
-                                    ...el.classes,
-                                    'calendar-section__date-button',
-                                    el.date === selectedDate().date() && 'calendar-section__date-button_active',
-                                ].filter(Boolean).join(' ')}"
-                            >
-                                ${() => el.date}
-                            </button>
-                        `)}
-                    </div>
-                </div>
+    return html`
+      <div class="calendar-section__block calendar-section__calendar-block">
+        <div class="calendar-section__calendar">
+          <div class="calendar-section__calendar_controls">
+            <div class="calendar-section__calendar_month_title">
+              ${() => selectedDate().format("MMMM")}
             </div>
-        `;
-    }
-
-    const Event = (props) => html`
-        <div
-            class="calendar-section__event"
-            style="${() => `
-                background-image: 
-                    linear-gradient(
-                        356.75deg,
-                        rgba(0, 0, 0, 0.2) 13.4%,
-                        rgba(0, 0, 0, 0) 97.73%
-                    ),
-                    linear-gradient(
-                        0deg,
-                        rgba(0, 0, 0, 0.2),
-                        rgba(0, 0, 0, 0.2)
-                    ),
-                    url("${props.imageUrl}");
-            `}"
-        >
-            <div class="calendar-section__event__title">
-                ${() => props.title}
+            <div class="calendar-section__calendar_month_arrows">
+              <${ArrowButton}
+                back=${true}
+                disabled=${() => selectedDate().month() === 11}
+                onClick=${(e) =>
+                  setSelectedDate(
+                    moment(selectedDate()).subtract(1, "month").startOf("month")
+                  )}
+              />
+              <${ArrowButton}
+                disabled=${() => selectedDate().month() === 1}
+                onClick=${(e) =>
+                  setSelectedDate(
+                    moment(selectedDate()).add(1, "month").startOf("month")
+                  )}
+              />
             </div>
-            <div class="calendar-section__event__description">
-                ${() => props.description}
-            </div>
+          </div>
+          <div class="calendar-section__calendar_content">
+            ${() =>
+              calendar().map(
+                (el, i) => html`
+                  <button
+                    onClick=${(e) =>
+                      setSelectedDate(() =>
+                        moment(selectedDate()).date(el.date)
+                      )}
+                    class="${() =>
+                      [
+                        ...el.classes,
+                        "calendar-section__date-button",
+                        el.date === selectedDate().date() &&
+                          "calendar-section__date-button_active",
+                      ]
+                        .filter(Boolean)
+                        .join(" ")}"
+                  >
+                    ${() => el.date}
+                  </button>
+                `
+              )}
+          </div>
         </div>
+      </div>
     `;
+  };
 
-    const Pagination = ({ total, current }) => html`
-        <div class="calendar-section__pagination">
-            ${Array(total).fill(null).map((el, i) => html`
-                <div class=${() => i === current()
-            ? 'calendar-section__pagination__item calendar-section__pagination__item-active'
-            : 'calendar-section__pagination__item'}
-                />
-            `)}
-        </div>
-    `
+  const Event = (props) => html`
+    <div
+      class="calendar-section__event"
+      style="${() => `
+              background-image: 
+                  linear-gradient(
+                      356.75deg,
+                      rgba(0, 0, 0, 0.2) 13.4%,
+                      rgba(0, 0, 0, 0) 97.73%
+                  ),
+                  linear-gradient(
+                      0deg,
+                      rgba(0, 0, 0, 0.2),
+                      rgba(0, 0, 0, 0.2)
+                  ),
+                  url("${props.imageUrl}");
+          `}"
+    >
+      <div class="calendar-section__event__title">${() => props.title}</div>
+      <div class="calendar-section__event__description">
+        ${() => props.description}
+      </div>
+      <button
+        class="calendar-section__event__homePage_button"
+        onClick=${(e) => window.open(props.homePage)}
+      >
+        Перейти
+      </button>
+    </div>
+  `;
 
-    const ArrowButton = (props) => html`
-        <button
-            class="calendar-section__icon-button"
-            onClick=${(e) => props.onClick(e)}
-            style="${() => props.back ? 'transform: rotate(180deg)' : ''}"
-            disabled=${() => props.disabled}
-        >
-            <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 21L11 11L1 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </button>
-    `
+  const Pagination = ({ total, current }) => html`
+    <div class="calendar-section__pagination">
+      ${Array(total)
+        .fill(null)
+        .map(
+          (el, i) => html`
+            <div
+              class=${() =>
+                i === current()
+                  ? "calendar-section__pagination__item calendar-section__pagination__item-active"
+                  : "calendar-section__pagination__item"}
+            />
+          `
+        )}
+    </div>
+  `;
 
-    const EventsBlock = () => {
-        const events = () => EVENTS[formattedSelectedDate(DATE_FORMAT)]?.length
-            ? EVENTS[formattedSelectedDate()]
-            : [DEFAULT_EVENT];
-        const [selectedEventIndex, setSelectedEventIndex] = createSignal(0);
+  const ArrowButton = (props) => html`
+    <button
+      class="calendar-section__icon-button"
+      onClick=${(e) => props.onClick(e)}
+      style="${() => (props.back ? "transform: rotate(180deg)" : "")}"
+      disabled=${() => props.disabled}
+    >
+      <svg
+        width="12"
+        height="22"
+        viewBox="0 0 12 22"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M1 21L11 11L1 1"
+          stroke="white"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
+  `;
 
-        createEffect(() => {
-            selectedDate();
-            setSelectedEventIndex(0);
-        })
+  const EventsBlock = () => {
+    const events = () =>
+      EVENTS[formattedSelectedDate(DATE_FORMAT)]?.length
+        ? EVENTS[formattedSelectedDate()]
+        : [DEFAULT_EVENT];
+    const [selectedEventIndex, setSelectedEventIndex] = createSignal(0);
 
-        return html`
-            <div class="calendar-section__block calendar-section__events-block">
-                <${Event}
-                    imageUrl=${() => events()[selectedEventIndex()]?.imageUrl}
-                    title=${() => events()[selectedEventIndex()]?.title}
-                    description=${() => events()[selectedEventIndex()]?.description}
-                />
-                <${Show} when=${() => events().length > 1}>
-                    <div class="calendar-section__event-controls">
-                        <div class="calendar-section__event-controls__arrows-container">
-                            <div>
-                                <${Show} when=${() => selectedEventIndex() > 0}> 
-                                    <${ArrowButton}
-                                        back=${true}
-                                        onClick=${(e) => setSelectedEventIndex(v => v - 1)}
-                                    />
-                                <//>
-                            </div>
-                            <div>
-                                <${Show} when=${() => selectedEventIndex() < events().length - 1}> 
-                                    <${ArrowButton}
-                                        onClick=${(e) => setSelectedEventIndex(v => v + 1)}
-                                    />
-                                <//>
-                            </div>
-                        </div>
-                        <${Pagination}
-                            total=${() => events().length}
-                            current=${() => selectedEventIndex}
-                        />
-                    </div>
-                </div>
-            <//>
-        `;
-    }
+    createEffect(() => {
+      selectedDate();
+      setSelectedEventIndex(0);
+    });
 
-    const App = () => {
-        return html`
-            <div class="calendar-section">
-                <${CalendarBlock} />
-                <${EventsBlock} />
-            </div>
-        `;
-    };
+    return html`
+          <div class="calendar-section__block calendar-section__events-block">
+              <${Event}
+                  imageUrl=${() => events()[selectedEventIndex()]?.imageUrl}
+                  title=${() => events()[selectedEventIndex()]?.title}
+                  description=${() =>
+                    events()[selectedEventIndex()]?.description}
+                    homePage=${() => events()[selectedEventIndex()]?.homePage}
+              />
+              <${Show} when=${() => events().length > 1}>
+                  <div class="calendar-section__event-controls">
+                      <div class="calendar-section__event-controls__arrows-container">
+                          <div>
+                              <${Show} when=${() => selectedEventIndex() > 0}> 
+                                  <${ArrowButton}
+                                      back=${true}
+                                      onClick=${(e) =>
+                                        setSelectedEventIndex((v) => v - 1)}
+                                  />
+                              <//>
+                          </div>
+                          <div>
+                              <${Show} when=${() =>
+      selectedEventIndex() < events().length - 1}> 
+                                  <${ArrowButton}
+                                      onClick=${(e) =>
+                                        setSelectedEventIndex((v) => v + 1)}
+                                  />
+                              <//>
+                          </div>
+                      </div>
+                      <${Pagination}
+                          total=${() => events().length}
+                          current=${() => selectedEventIndex}
+                      />
+                  </div>
+              </div>
+          <//>
+      `;
+  };
 
-    render(App, document.getElementById('calendar'));
+  const App = () => {
+    return html`
+      <div class="calendar-section">
+        <${CalendarBlock} />
+        <${EventsBlock} />
+      </div>
+    `;
+  };
+
+  render(App, document.getElementById("calendar"));
 </script>
